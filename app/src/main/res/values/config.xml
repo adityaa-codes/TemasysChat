@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="is_app_key_smr">false</bool>
+    <string name="app_key_no_smr">Add-Your-Key-Here</string>
+    <string name="app_key_secret_no_smr">Here-Too</string>
+    <string name="app_key_desc_no_smr">Non SMR Key for my awesome application</string>
+</resources>
+
+    <!--Uncomment in config.xml-->
+
+    <!--Uncomment in config.xml-->
+    <!--Enter your App Key Details Below-->
