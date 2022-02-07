@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/roomFragment">
+
+
+
+
+    <fragment
+        android:id="@+id/roomFragment"
+        android:name="codes.adityaa.temasyschat.chat.ui.roomScreen.RoomFragment"
+        android:label="RoomFragment"
+        tools:layout="@layout/fragment_room">
+        <action
+            android:id="@+id/action_roomFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="codes.adityaa.temasyschat.chat.ui.chatScreen.ChatFragment"
+        android:label="ChatFragment"
+        tools:layout="@layout/fragment_chat">
+
+    </fragment>
+
+</navigation>

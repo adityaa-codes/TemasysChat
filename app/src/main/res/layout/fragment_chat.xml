@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/materialToolBar"
+                    style="@style/Widget.MaterialComponents.AppBarLayout.Primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:contentInsetStartWithNavigation="4dp"
+                    app:navigationIcon="@drawable/ic_arrow_back_black"
+                    app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline5">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/userAvatar"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:src="@tools:sample/avatars" />
+
+                        <TextView
+                            android:id="@+id/roomName"
+                            style="@style/TextAppearance.MaterialComponents.Headline5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@{roomList.receivername}"
+
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/userAvatar"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Aditya Gupta" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </com.google.android.material.appbar.MaterialToolbar>
+
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <TextView
+                android:id="@+id/temasysPlaceholder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/black_800"
+                android:fontFamily="@font/roboto"
+                android:paddingStart="4dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="6dp"
+                android:paddingBottom="4dp"
+                android:text="\u26A1 Powered By Temasys"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
+
+            <TextView
+                android:id="@+id/notePlaceholder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/light_gray"
+                android:fontFamily="@font/roboto"
+                android:paddingStart="8dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="6dp"
+                android:text="Please wait a few seconds for the chat to load.\nNote: Any form of profanity in the chat can get your profile banned."
+                android:textAlignment="center"
+                android:textColor="@color/black_900"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temasysPlaceholder" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/messagesRV"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/chat_background"
+                app:layoutManager="LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@+id/messagesTIL"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/notePlaceholder"
+                app:layout_constraintVertical_bias="0.0"
+                tools:listitem="@layout/item_chat_local" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/messagesTIL"
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:hint="Enter Message"
+
+                app:boxCornerRadiusBottomEnd="32dp"
+                app:boxCornerRadiusBottomStart="32dp"
+                app:boxCornerRadiusTopEnd="32dp"
+                app:boxCornerRadiusTopStart="32dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/sendMessageBtn"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/messagesTIET"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="8dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/sendMessageBtn"
+                style="@style/Widget.MaterialComponents.FloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="send_button"
+                android:elevation="2dp"
+                android:src="@drawable/ic_send_white_small"
+                app:tint="@color/white"
+                app:fabSize="mini"
+                app:maxImageSize="20dp"
+                android:scaleType="center"
+                app:layout_constraintBottom_toBottomOf="@+id/messagesTIL"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/messagesTIL" />
+
+
+
+
+            <!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+            <!--                android:id="@+id/fabCamera"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                style="@style/Widget.MaterialComponents.FloatingActionButton"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:layout_marginEnd="8dp"-->
+            <!--                android:layout_marginBottom="8dp"-->
+            <!--                app:srcCompat="@drawable/ic_send_white"-->
+            <!--                app:backgroundTint="@color/white"-->
+            <!--                app:fabSize="mini"-->
+            <!--                android:contentDescription="send_button"-->
+
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/messagesTIL"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/messagesTIL" />-->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
