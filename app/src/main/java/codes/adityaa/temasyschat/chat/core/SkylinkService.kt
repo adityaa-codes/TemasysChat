@@ -21,6 +21,9 @@ import sg.com.temasys.skylink.sdk.rtc.SkylinkConnection.SkylinkState
 import sg.com.temasys.skylink.sdk.rtc.SkylinkEvent.CONTEXT_DESCRIPTION
 import timber.log.Timber
 import java.util.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import android.widget.Toast
 
 
 class SkylinkService(
@@ -238,6 +241,7 @@ class SkylinkService(
             _events.emit(ChatScreenEvents.Loading)
 
         }
+
         skylinkConnection?.connectToRoom(
             config.appKey, config.appKeySecret, ROOM_NAME, USER_NAME,
             object : SkylinkCallback {
@@ -248,19 +252,22 @@ class SkylinkService(
                 }
             })
 
-        if (skylinkConnection != null) {
-            val state = skylinkConnection!!.skylinkState
-            if (state == SkylinkState.CONNECTED) {
-                LifecycleService().lifecycleScope.launch(Dispatchers.Default) {
-                    _events.emit(ChatScreenEvents.RoomConnected)
+        // Create a coroutine to move the execution off the main thread to an IO thread
+        CoroutineScope(Dispatchers.IO).launch {
+            // Wait until connected to Skylink room
+            while (skylinkConnection?.skylinkState != SkylinkState.CONNECTED) delay(500)
 
-                }
+            // New coroutine to run on the mail thread
+            CoroutineScope(Dispatchers.Main).launch {
+                Toast.makeText(context, skylinkConnection?.skylinkState?.toString(), Toast.LENGTH_SHORT).show() // Displays "CONNECTED" toast message
+                setEncryptedMap()
+                Timber.d("connectToRoom:" + skylinkConnection?.selectedSecretId + " ")
+                _events.emit(ChatScreenEvents.RoomConnected)
             }
         }
-        setEncryptedMap()
 
         //getStoredMessagesLocal()
-        Timber.d("connectToRoom:" + skylinkConnection?.selectedSecretId + " ")
+
         //if(SkylinkConnection.SkylinkState.valueOf() == SkylinkConnection.SkylinkState.CONNECTED)
 
 //        skylinkConnection?.disconnectFromRoom(object : SkylinkCallback{
